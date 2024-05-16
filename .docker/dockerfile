@@ -1,0 +1,15 @@
+# Utiliser l'image Jenkins LTS en tant que base
+FROM rancher/dind:latest
+
+# Définir l'utilisateur root pour pouvoir installer des packages
+USER root
+
+# Installer Java
+RUN add-apt-repository ppa:openjdk-r/ppa && \ 
+    apt update && \
+    apt install -y openjdk-8-jdk && \
+    rm -rf /var/lib/apt/lists/*
+
+# Revenir à l'utilisateur jenkins défini par l'image de base
+USER jenkins
+
